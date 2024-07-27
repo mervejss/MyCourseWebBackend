@@ -15,11 +15,11 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "userID", referencedColumnName = "userID", nullable = false)
-    private User user; // User tablosundaki userID ile ilişkilendirilmiş
+    private User userID; // User tablosundaki userID ile ilişkilendirilmiş
 
     @ManyToOne
     @JoinColumn(name = "courseID", referencedColumnName = "courseID", nullable = false)
-    private Course course; // Course tablosundaki courseID ile ilişkilendirilmiş
+    private Course courseID; // Course tablosundaki courseID ile ilişkilendirilmiş
 
     @Column(length = 1500)
     private String commentDescription;
@@ -53,20 +53,20 @@ public class Comment {
         this.commentID = commentID;
     }
 
-    public User getUser() {
-        return user;
+    public User getUserID() {
+        return userID;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserID(User userID) {
+        this.userID = userID;
     }
 
-    public Course getCourse() {
-        return course;
+    public Course getCourseID() {
+        return courseID;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseID(Course courseID) {
+        this.courseID = courseID;
     }
 
     public String getCommentDescription() {

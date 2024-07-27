@@ -38,8 +38,8 @@ public class CommentService {
             Comment existingComment = optionalComment.get();
             existingComment.setCommentDescription(newComment.getCommentDescription());
             existingComment.setCommentScore(newComment.getCommentScore());
-            existingComment.setUser(newComment.getUser());
-            existingComment.setCourse(newComment.getCourse());
+            existingComment.setUserID(newComment.getUserID());
+            existingComment.setCourseID(newComment.getCourseID());
             existingComment.setUpdatedAt(new Date()); // Optional, as @PreUpdate will handle this
             return commentRepository.save(existingComment);
         }

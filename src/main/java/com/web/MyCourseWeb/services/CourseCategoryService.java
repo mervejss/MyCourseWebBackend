@@ -21,9 +21,14 @@ public class CourseCategoryService {
         return courseCategoryRepository.findAll();
     }
 
-    // Yeni bir kurs kategorisi oluştur
-    public CourseCategory saveOneCourseCategory(CourseCategory newCourseCategory) {
-        return courseCategoryRepository.save(newCourseCategory);
+//    // Yeni bir kurs kategorisi oluştur
+//    public CourseCategory saveOneCourseCategory(CourseCategory newCourseCategory) {
+//        return courseCategoryRepository.save(newCourseCategory);
+//    }
+
+    // Birden fazla kurs kategorisini kaydet
+    public List<CourseCategory> saveAllCourseCategories(List<CourseCategory> newCourseCategories) {
+        return courseCategoryRepository.saveAll(newCourseCategories);
     }
 
     // Tek bir kurs kategorisini getir

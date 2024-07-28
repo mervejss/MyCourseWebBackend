@@ -22,11 +22,17 @@ public class CourseCategoryController {
         return courseCategoryService.getAllCourseCategories();
     }
 
-    // Yeni bir kurs kategorisi oluştur
+//    // Yeni bir kurs kategorisi oluştur
+//    @PostMapping
+//    public CourseCategory createCourseCategory(@RequestBody CourseCategory newCourseCategory) {
+//        return courseCategoryService.saveOneCourseCategory(newCourseCategory);
+//    }
+
     @PostMapping
-    public CourseCategory createCourseCategory(@RequestBody CourseCategory newCourseCategory) {
-        return courseCategoryService.saveOneCourseCategory(newCourseCategory);
+    public List<CourseCategory> createCourseCategories(@RequestBody List<CourseCategory> newCourseCategories) {
+        return courseCategoryService.saveAllCourseCategories(newCourseCategories);
     }
+
 
     // Tek bir kurs kategorisini getir
     @GetMapping("/{courseCategoryID}")

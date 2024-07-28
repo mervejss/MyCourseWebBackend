@@ -25,19 +25,6 @@ public class UserService {
         return userRepository.save(newUser);
 
     }
-      /*
-    public User saveOneUser(UserRequest newUserRequest) {
-               getOneUser(newUser)
- User user= getOneUser(newUserRequest.getUserID());
-        if(user==null)
-            return null;
-        User toSave = new User();
-        //toSave.setUserID(newUserRequest.getUserID());
-
-        return userRepository.save(newUserRequest);
-
-    }
-*/
 
     public User getOneUser(Long userID) {
         return userRepository.findById(userID).orElse(null);

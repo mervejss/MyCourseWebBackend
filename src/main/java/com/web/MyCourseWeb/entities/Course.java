@@ -13,6 +13,12 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseID;
 
+
+    @ManyToOne
+    @JoinColumn(name = "courseCategoryID", referencedColumnName = "courseCategoryID")
+    private CourseCategory courseCategoryID; // CourseCategory tablosundaki courseCategoryID ile ilişkilendirilmiş
+
+
     private String courseName;
 
     private String courseDescription;
@@ -20,6 +26,7 @@ public class Course {
     private Long courseTotalTime; // Yeni sütun
 
     private Long coursePrice;
+
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;

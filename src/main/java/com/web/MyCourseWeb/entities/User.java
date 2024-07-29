@@ -17,15 +17,21 @@ public class User {
     @JoinColumn(name = "userRoleID", referencedColumnName = "roleID")
     private Role userRoleID; // Role tablosundaki roleID ile ilişkilendirilmiş
 
+    private String userFullName;
+
+
+
     private String userName;
 
     private String userMail;
 
     private String userPassword;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "courseIDofTheUser", referencedColumnName = "courseID")
     private Course CourseIDofTheUser; // Course tablosundaki courseID ile ilişkilendirilmiş
+
+     */
 
     @Enumerated(EnumType.ORDINAL)
     private PurchaseOrSaleType purchaseOrSale; // Satın Alma veya Satış işlemi
@@ -59,6 +65,14 @@ public class User {
         this.userRoleID = userRoleID;
     }
 
+    public String getUserFullName() {
+        return userFullName;
+    }
+
+    public void setUserFullName(String userFullName) {
+        this.userFullName = userFullName;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -81,14 +95,6 @@ public class User {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
-    }
-
-    public Course getCourseIDofTheUser() {
-        return CourseIDofTheUser;
-    }
-
-    public void setCourseIDofTheUser(Course courseIDofTheUser) {
-        CourseIDofTheUser = courseIDofTheUser;
     }
 
     public PurchaseOrSaleType getPurchaseOrSale() {

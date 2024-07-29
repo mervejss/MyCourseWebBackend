@@ -36,11 +36,12 @@ public class UserService {
         if (user.isPresent()) {
             User foundUser = user.get();
             foundUser.setUserName(newUser.getUserName());
+            foundUser.setUserFullName(newUser.getUserFullName());
             foundUser.setUserMail(newUser.getUserMail());
             foundUser.setUserPassword(newUser.getUserPassword());
             foundUser.setPurchaseOrSale(newUser.getPurchaseOrSale());
             foundUser.setUserRoleID(newUser.getUserRoleID());
-            foundUser.setCourseIDofTheUser(newUser.getCourseIDofTheUser());
+            //foundUser.setCourseIDofTheUser(newUser.getCourseIDofTheUser());
 
             userRepository.save(foundUser);
             return foundUser;

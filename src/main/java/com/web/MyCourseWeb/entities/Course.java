@@ -18,6 +18,19 @@ public class Course {
     @JoinColumn(name = "courseCategoryID", referencedColumnName = "courseCategoryID")
     private CourseCategory courseCategoryID; // CourseCategory tablosundaki courseCategoryID ile ilişkilendirilmiş
 
+    @ManyToOne
+    @JoinColumn(name = "userID", referencedColumnName = "userID")
+    private User userID; // User tablosundaki userID ile ilişkilendirilmiş
+
+    public CourseCategory getCourseCategoryID() {
+        return courseCategoryID;
+    }
+
+    public void setCourseCategoryID(CourseCategory courseCategoryID) {
+        this.courseCategoryID = courseCategoryID;
+    }
+
+
 
     private String courseName;
 
@@ -42,6 +55,14 @@ public class Course {
 
     public void setCourseID(Long courseID) {
         this.courseID = courseID;
+    }
+
+    public User getUserID() {
+        return userID;
+    }
+
+    public void setUserID(User userID) {
+        this.userID = userID;
     }
 
     public String getCourseName() {

@@ -15,11 +15,11 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "userID", referencedColumnName = "userID", nullable = false)
-    private User userID; // User tablosundaki userID ile ilişkilendirilmiş
+    private User userID; // User tablosundaki userID ile ilişkilendirilmiş postmanda request ve response larda bu veri long olarak gösterilmesi yeterli olacaktır bizim için.
 
     @ManyToOne
     @JoinColumn(name = "courseID", referencedColumnName = "courseID", nullable = false)
-    private Course courseID; // Course tablosundaki courseID ile ilişkilendirilmiş
+    private Course courseID; // Course tablosundaki courseID ile ilişkilendirilmiş postmanda request ve response larda bu veri long olarak gösterilmesi yeterli olacaktır bizim için.
 
     @Column(length = 1500)
     private String commentDescription;

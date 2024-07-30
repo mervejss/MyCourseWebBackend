@@ -1,6 +1,6 @@
 package com.web.MyCourseWeb.controllers;
 
-import com.web.MyCourseWeb.entities.Comment;
+import com.web.MyCourseWeb.dtos.CommentDTO;
 import com.web.MyCourseWeb.services.CommentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,26 +18,26 @@ public class CommentController {
 
     // Tüm yorumları getir
     @GetMapping
-    public List<Comment> getAllComments() {
+    public List<CommentDTO> getAllComments() {
         return commentService.getAllComments();
     }
 
     // Yeni bir yorum oluştur
     @PostMapping
-    public Comment createComment(@RequestBody Comment newComment) {
-        return commentService.saveOneComment(newComment);
+    public CommentDTO createComment(@RequestBody CommentDTO newCommentDTO) {
+        return commentService.saveOneComment(newCommentDTO);
     }
 
     // Tek bir yorumu getir
     @GetMapping("/{commentID}")
-    public Comment getOneComment(@PathVariable Long commentID) {
+    public CommentDTO getOneComment(@PathVariable Long commentID) {
         return commentService.getOneComment(commentID);
     }
 
     // Var olan bir yorumu güncelle
     @PutMapping("/{commentID}")
-    public Comment updateOneComment(@PathVariable Long commentID, @RequestBody Comment newComment) {
-        return commentService.updateOneComment(commentID, newComment);
+    public CommentDTO updateOneComment(@PathVariable Long commentID, @RequestBody CommentDTO newCommentDTO) {
+        return commentService.updateOneComment(commentID, newCommentDTO);
     }
 
     // Tek bir yorumu sil

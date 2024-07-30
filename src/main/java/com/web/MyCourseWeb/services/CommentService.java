@@ -1,12 +1,17 @@
 package com.web.MyCourseWeb.services;
 
+import com.web.MyCourseWeb.dtos.CommentDTO;
 import com.web.MyCourseWeb.entities.Comment;
+import com.web.MyCourseWeb.entities.Course;
+import com.web.MyCourseWeb.entities.User;
+import com.web.MyCourseWeb.mappers.CommentMapper;
 import com.web.MyCourseWeb.repos.CommentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -18,30 +23,42 @@ public class CommentService {
     }
 
     // Tüm yorumları getir
-    public List<Comment> getAllComments() {
-        return commentRepository.findAll();
+    public List<CommentDTO> getAllComments() {
+        return commentRepository.findAll().stream()
+                .map(CommentMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     // Tek bir yorum getir
-    public Comment getOneComment(Long commentID) {
-        return commentRepository.findById(commentID).orElse(null);
+    public CommentDTO getOneComment(Long commentID) {
+        return commentRepository.findById(commentID)
+                .map(CommentMapper::toDTO)
+                .orElse(null);
     }
 
     // Yeni bir yorum oluştur
-    public Comment saveOneComment(Comment newComment) {
-        return commentRepository.save(newComment);
+    public CommentDTO saveOneComment(CommentDTO newCommentDTO) {
+        Comment newComment = CommentMapper.toEntity(newCommentDTO);
+        return CommentMapper.toDTO(commentRepository.save(newComment));
     }
 
-    public Comment updateOneComment(Long commentID, Comment newComment) {
+    public CommentDTO updateOneComment(Long commentID, CommentDTO newCommentDTO) {
         Optional<Comment> optionalComment = commentRepository.findById(commentID);
         if (optionalComment.isPresent()) {
             Comment existingComment = optionalComment.get();
-            existingComment.setCommentDescription(newComment.getCommentDescription());
-            existingComment.setCommentScore(newComment.getCommentScore());
-            existingComment.setUserID(newComment.getUserID());
-            existingComment.setCourseID(newComment.getCourseID());
+            existingComment.setCommentDescription(newCommentDTO.getCommentDescription());
+            existingComment.setCommentScore(newCommentDTO.getCommentScore());
+
+            User user = new User();
+            user.setUserID(newCommentDTO.getUserID());
+            existingComment.setUserID(user);
+
+            Course course = new Course();
+            course.setCourseID(newCommentDTO.getCourseID());
+            existingComment.setCourseID(course);
+
             existingComment.setUpdatedAt(new Date()); // Optional, as @PreUpdate will handle this
-            return commentRepository.save(existingComment);
+            return CommentMapper.toDTO(commentRepository.save(existingComment));
         }
         return null;
     }

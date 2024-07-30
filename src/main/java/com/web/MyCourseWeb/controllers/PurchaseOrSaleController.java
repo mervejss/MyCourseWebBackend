@@ -1,6 +1,6 @@
 package com.web.MyCourseWeb.controllers;
 
-import com.web.MyCourseWeb.entities.PurchaseOrSale;
+import com.web.MyCourseWeb.dtos.PurchaseOrSaleDTO;
 import com.web.MyCourseWeb.services.PurchaseOrSaleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,37 +17,42 @@ public class PurchaseOrSaleController {
         this.purchaseOrSaleService = purchaseOrSaleService;
     }
 
+    // Tüm işlemleri getir
     @GetMapping
-    public List<PurchaseOrSale> getAllTransactions() {
+    public List<PurchaseOrSaleDTO> getAllTransactions() {
         return purchaseOrSaleService.getAllTransactions();
     }
 
+    // Yeni bir işlem oluştur
     @PostMapping
-    public PurchaseOrSale createTransaction(@RequestBody PurchaseOrSale newTransaction) {
-        return purchaseOrSaleService.saveOneTransaction(newTransaction);
+    public PurchaseOrSaleDTO createTransaction(@RequestBody PurchaseOrSaleDTO newTransactionDTO) {
+        return purchaseOrSaleService.saveOneTransaction(newTransactionDTO);
     }
 
+    // Tek bir işlemi getir
     @GetMapping("/{transactionID}")
-    public ResponseEntity<PurchaseOrSale> getOneTransaction(@PathVariable Long transactionID) {
-        PurchaseOrSale transaction = purchaseOrSaleService.getOneTransaction(transactionID);
-        return transaction != null ? ResponseEntity.ok(transaction) : ResponseEntity.notFound().build();
+    public ResponseEntity<PurchaseOrSaleDTO> getOneTransaction(@PathVariable Long transactionID) {
+        PurchaseOrSaleDTO transactionDTO = purchaseOrSaleService.getOneTransaction(transactionID);
+        return transactionDTO != null ? ResponseEntity.ok(transactionDTO) : ResponseEntity.notFound().build();
     }
 
+    // Var olan bir işlemi güncelle
     @PutMapping("/{transactionID}")
-    public ResponseEntity<PurchaseOrSale> updateOneTransaction(@PathVariable Long transactionID, @RequestBody PurchaseOrSale newTransaction) {
-        PurchaseOrSale updatedTransaction = purchaseOrSaleService.updateOneTransaction(transactionID, newTransaction);
-        return updatedTransaction != null ? ResponseEntity.ok(updatedTransaction) : ResponseEntity.notFound().build();
+    public ResponseEntity<PurchaseOrSaleDTO> updateOneTransaction(@PathVariable Long transactionID, @RequestBody PurchaseOrSaleDTO newTransactionDTO) {
+        PurchaseOrSaleDTO updatedTransactionDTO = purchaseOrSaleService.updateOneTransaction(transactionID, newTransactionDTO);
+        return updatedTransactionDTO != null ? ResponseEntity.ok(updatedTransactionDTO) : ResponseEntity.notFound().build();
     }
 
+    // Tek bir işlemi sil
     @DeleteMapping("/{transactionID}")
     public ResponseEntity<Void> deleteOneTransaction(@PathVariable Long transactionID) {
         purchaseOrSaleService.deleteOneTransaction(transactionID);
         return ResponseEntity.noContent().build();
     }
 
+    // Tüm işlemleri sil
     @DeleteMapping
     public void deleteAllPurchaseOrSale() {
         purchaseOrSaleService.deleteAllPurchaseOrSale();
     }
-
 }

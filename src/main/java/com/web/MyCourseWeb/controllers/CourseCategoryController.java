@@ -1,7 +1,8 @@
 package com.web.MyCourseWeb.controllers;
 
-import com.web.MyCourseWeb.entities.CourseCategory;
+import com.web.MyCourseWeb.dtos.CourseCategoryDTO;
 import com.web.MyCourseWeb.services.CourseCategoryService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,38 +19,35 @@ public class CourseCategoryController {
 
     // Tüm kurs kategorilerini getir
     @GetMapping
-    public List<CourseCategory> getAllCourseCategories() {
+    public List<CourseCategoryDTO> getAllCourseCategories() {
         return courseCategoryService.getAllCourseCategories();
     }
 
-//    // Yeni bir kurs kategorisi oluştur
-//    @PostMapping
-//    public CourseCategory createCourseCategory(@RequestBody CourseCategory newCourseCategory) {
-//        return courseCategoryService.saveOneCourseCategory(newCourseCategory);
-//    }
-
+    // Birden fazla kurs kategorisi oluştur
     @PostMapping
-    public List<CourseCategory> createCourseCategories(@RequestBody List<CourseCategory> newCourseCategories) {
-        return courseCategoryService.saveAllCourseCategories(newCourseCategories);
+    public List<CourseCategoryDTO> createCourseCategories(@RequestBody List<CourseCategoryDTO> newCourseCategoryDTOs) {
+        return courseCategoryService.saveAllCourseCategories(newCourseCategoryDTOs);
     }
-
 
     // Tek bir kurs kategorisini getir
     @GetMapping("/{courseCategoryID}")
-    public CourseCategory getOneCourseCategory(@PathVariable Long courseCategoryID) {
-        return courseCategoryService.getOneCourseCategory(courseCategoryID);
+    public ResponseEntity<CourseCategoryDTO> getOneCourseCategory(@PathVariable Long courseCategoryID) {
+        CourseCategoryDTO courseCategoryDTO = courseCategoryService.getOneCourseCategory(courseCategoryID);
+        return courseCategoryDTO != null ? ResponseEntity.ok(courseCategoryDTO) : ResponseEntity.notFound().build();
     }
 
     // Var olan bir kurs kategorisini güncelle
     @PutMapping("/{courseCategoryID}")
-    public CourseCategory updateOneCourseCategory(@PathVariable Long courseCategoryID, @RequestBody CourseCategory newCourseCategory) {
-        return courseCategoryService.updateOneCourseCategory(courseCategoryID, newCourseCategory);
+    public ResponseEntity<CourseCategoryDTO> updateOneCourseCategory(@PathVariable Long courseCategoryID, @RequestBody CourseCategoryDTO newCourseCategoryDTO) {
+        CourseCategoryDTO updatedCourseCategoryDTO = courseCategoryService.updateOneCourseCategory(courseCategoryID, newCourseCategoryDTO);
+        return updatedCourseCategoryDTO != null ? ResponseEntity.ok(updatedCourseCategoryDTO) : ResponseEntity.notFound().build();
     }
 
     // Tek bir kurs kategorisini sil
     @DeleteMapping("/{courseCategoryID}")
-    public void deleteOneCourseCategory(@PathVariable Long courseCategoryID) {
+    public ResponseEntity<Void> deleteOneCourseCategory(@PathVariable Long courseCategoryID) {
         courseCategoryService.deleteOneCourseCategory(courseCategoryID);
+        return ResponseEntity.noContent().build();
     }
 
     // Tüm kurs kategorilerini sil

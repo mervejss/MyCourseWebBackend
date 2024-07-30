@@ -46,12 +46,20 @@ public class Log {
         this.logID = logID;
     }
 
-    public User getLogUserID() {
+    public User getUserID() {
         return userID;
     }
 
-    public void setLogUserID(User logUserID) {
-        this.userID = logUserID;
+    public void setUserID(User userID) {
+        this.userID = userID;
+    }
+
+    public Log.LogAction getLogAction() {
+        return LogAction;
+    }
+
+    public void setLogAction(Log.LogAction logAction) {
+        LogAction = logAction;
     }
 
     public Date getCreatedAt() {

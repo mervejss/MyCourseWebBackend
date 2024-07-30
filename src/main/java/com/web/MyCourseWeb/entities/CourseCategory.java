@@ -16,7 +16,7 @@ public class CourseCategory {
 
     @ManyToOne
     @JoinColumn(name = "parent_category_id")
-    private CourseCategory parentCategory;
+    private CourseCategory parentCategory; //Bu kısım postman requestlerinde  LONG veritipinde tutulması gerekiyor
 
     private String courseCategoryName;
 
@@ -51,5 +51,13 @@ public class CourseCategory {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public CourseCategory getParentCategory() {
+        return parentCategory;
+    }
+
+    public void setParentCategory(CourseCategory parentCategory) {
+        this.parentCategory = parentCategory;
     }
 }

@@ -1,6 +1,6 @@
 package com.web.MyCourseWeb.controllers;
 
-import com.web.MyCourseWeb.entities.Log;
+import com.web.MyCourseWeb.dtos.LogDTO;
 import com.web.MyCourseWeb.services.LogService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,37 +17,42 @@ public class LogController {
         this.logService = logService;
     }
 
+    // Tüm logları getir
     @GetMapping
-    public List<Log> getAllLogs() {
+    public List<LogDTO> getAllLogs() {
         return logService.getAllLogs();
     }
 
+    // Yeni bir log oluştur
     @PostMapping
-    public Log createLog(@RequestBody Log newLog) {
-        return logService.saveOneLog(newLog);
+    public LogDTO createLog(@RequestBody LogDTO newLogDTO) {
+        return logService.saveOneLog(newLogDTO);
     }
 
+    // Tek bir logu getir
     @GetMapping("/{logID}")
-    public ResponseEntity<Log> getOneLog(@PathVariable Long logID) {
-        Log log = logService.getOneLog(logID);
-        return log != null ? ResponseEntity.ok(log) : ResponseEntity.notFound().build();
+    public ResponseEntity<LogDTO> getOneLog(@PathVariable Long logID) {
+        LogDTO logDTO = logService.getOneLog(logID);
+        return logDTO != null ? ResponseEntity.ok(logDTO) : ResponseEntity.notFound().build();
     }
 
+    // Var olan bir logu güncelle
     @PutMapping("/{logID}")
-    public ResponseEntity<Log> updateOneLog(@PathVariable Long logID, @RequestBody Log newLog) {
-        Log updatedLog = logService.updateOneLog(logID, newLog);
-        return updatedLog != null ? ResponseEntity.ok(updatedLog) : ResponseEntity.notFound().build();
+    public ResponseEntity<LogDTO> updateOneLog(@PathVariable Long logID, @RequestBody LogDTO newLogDTO) {
+        LogDTO updatedLogDTO = logService.updateOneLog(logID, newLogDTO);
+        return updatedLogDTO != null ? ResponseEntity.ok(updatedLogDTO) : ResponseEntity.notFound().build();
     }
 
+    // Tek bir logu sil
     @DeleteMapping("/{logID}")
     public ResponseEntity<Void> deleteOneLog(@PathVariable Long logID) {
         logService.deleteOneLog(logID);
         return ResponseEntity.noContent().build();
     }
 
+    // Tüm logları sil
     @DeleteMapping
     public void deleteAllLogs() {
         logService.deleteAllLogs();
     }
-
 }

@@ -3,6 +3,8 @@ package com.web.MyCourseWeb.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "PurchaseOrSale")
 @Data
@@ -14,11 +16,11 @@ public class PurchaseOrSale {
 
     @ManyToOne
     @JoinColumn(name = "userID", referencedColumnName = "userID")
-    private User user; // User tablosundaki userID ile ilişkilendirilmiş
+    private User user; // User tablosundaki userID ile ilişkilendirilmiş//BU KISIM postmanda long  olarak tutulacak
 
     @ManyToOne
     @JoinColumn(name = "courseID", referencedColumnName = "courseID")
-    private Course courseID; // Course tablosundaki courseID ile ilişkilendirilmiş
+    private Course courseID; // Course tablosundaki courseID ile ilişkilendirilmiş //BU KISIM postmanda long  olarak tutulacak
 
 
     @Enumerated(EnumType.ORDINAL)
@@ -28,18 +30,18 @@ public class PurchaseOrSale {
     private Status status; // İşlemin durumu
 
     @Enumerated(EnumType.ORDINAL)
-    private PaymentMethod paymentMethod; // Kullanıcının işlemi gerçekleştirmek için kullandığı ödeme yöntemi
+    private PaymentMethod paymentMethod; // Kullanıcının işlemi gerçekleştirmek için kullandığı ödeme yöntemi //BU KISIM postmanda  0,1,2,3,4 gibi int olarak tutulacak
 
     public enum TransactionType {
         PURCHASE, SALE
     }
 
-    //COMPLETED=0, PENDING=1,CANCELED =2 gibi düşünebiliriz.
+    //COMPLETED=0, PENDING=1,CANCELED =2 gibi düşünebiliriz.//BU KISIM postmanda  0,1,2,3,4 gibi int olarak tutulacak
     public enum Status {
         COMPLETED, PENDING, CANCELED
     }
 
-    public enum PaymentMethod {
+    public enum PaymentMethod { //BU KISIM postmanda  0,1,2,3,4 gibi int olarak tutulacak
         CREDIT_CARD,
         DEBIT_CARD,
         BANK_TRANSFER,
@@ -51,6 +53,23 @@ public class PurchaseOrSale {
         PREPAID_CARD,
         CHECK,
         GIFT_CARD
+    }
+
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Long getPurchaseOrSaleID() {

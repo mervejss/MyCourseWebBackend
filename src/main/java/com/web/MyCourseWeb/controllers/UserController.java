@@ -1,54 +1,62 @@
 package com.web.MyCourseWeb.controllers;
 
-import com.web.MyCourseWeb.entities.User;
-import com.web.MyCourseWeb.repos.UserRepository;
+import com.web.MyCourseWeb.dtos.UserDTO;
 import com.web.MyCourseWeb.services.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/users")
-
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
-    public List<User> getAllUsers(){
+    public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @PostMapping
-    public User createUser(@RequestBody User newUser) {
-       return userService.saveOneUser(newUser);
-
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO newUserDTO) {
+        try {
+            UserDTO savedUser = userService.saveOneUser(newUserDTO);
+            return ResponseEntity.ok(savedUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     @GetMapping("/{userID}")
-    public User getOneUser(@PathVariable Long userID) {
-        return userService.getOneUser(userID);
+    public ResponseEntity<UserDTO> getOneUser(@PathVariable Long userID) {
+        UserDTO userDTO = userService.getOneUser(userID);
+        return userDTO != null ? ResponseEntity.ok(userDTO) : ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{userID}")
-    public User updateOneUser(@PathVariable Long userID, @RequestBody User newUser) {
-       return userService.updateOneUser(userID,newUser);
+    public ResponseEntity<UserDTO> updateOneUser(@PathVariable Long userID, @RequestBody UserDTO newUserDTO) {
+        try {
+            UserDTO updatedUser = userService.updateOneUser(userID, newUserDTO);
+            return updatedUser != null ? ResponseEntity.ok(updatedUser) : ResponseEntity.notFound().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     @DeleteMapping("/{userID}")
-    public void deleteOneUser(@PathVariable Long userID) {
+    public ResponseEntity<Void> deleteOneUser(@PathVariable Long userID) {
         userService.deleteOneUser(userID);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping
-    public void deleteAllUsers() {
+    public ResponseEntity<Void> deleteAllUsers() {
         userService.deleteAllUsers();
+        return ResponseEntity.noContent().build();
     }
-
 }

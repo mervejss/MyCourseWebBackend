@@ -1,48 +1,33 @@
-package com.web.MyCourseWeb.entities;
+package com.web.MyCourseWeb.dtos;
 
-import jakarta.persistence.*;
-import lombok.Data;
 import java.util.Date;
 
-@Entity
-@Table(name = "Users")
-@Data
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDTO {
     private Long userID;
-
-    @ManyToOne
-    @JoinColumn(name = "userRoleID", referencedColumnName = "roleID")
-    private Role userRoleID;
-    // Role tablosundaki roleID ile ilişkilendirilmiş postmanda request ve response larda bu veri long olarak gösterilmesi yeterli olacaktır bizim için.
-
+    private Long userRoleID;  // Role entity yerine roleID olarak temsil edilir.
     private String userFullName;
-
     private String userName;
-
     private String userMail;
-
     private String userPassword;
-
-
-    @Enumerated(EnumType.ORDINAL)
-    private PurchaseOrSaleType purchaseOrSale; // Satın Alma veya Satış işlemi
-    //PurchaseOrSale classında türetilmiş postmanda request ve response larda bu veri int (0 veya 1 ) olarak gösterilmesi yeterli olacaktır bizim için.
-    public enum PurchaseOrSaleType {
-        PURCHASE, // Satın Alma
-        SALE      // Satış
-    }
-
-    @Temporal(TemporalType.TIMESTAMP)
+    private int purchaseOrSale;  // Enum yerine int olarak tutulur.
     private Date createdAt;
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = new Date();
+    // Constructor
+    public UserDTO() {}
+
+    public UserDTO(Long userID, Long userRoleID, String userFullName, String userName,
+                   String userMail, String userPassword, int purchaseOrSale, Date createdAt) {
+        this.userID = userID;
+        this.userRoleID = userRoleID;
+        this.userFullName = userFullName;
+        this.userName = userName;
+        this.userMail = userMail;
+        this.userPassword = userPassword;
+        this.purchaseOrSale = purchaseOrSale;
+        this.createdAt = createdAt;
     }
 
+    // Getters and Setters
     public Long getUserID() {
         return userID;
     }
@@ -51,11 +36,11 @@ public class User {
         this.userID = userID;
     }
 
-    public Role getUserRoleID() {
+    public Long getUserRoleID() {
         return userRoleID;
     }
 
-    public void setUserRoleID(Role userRoleID) {
+    public void setUserRoleID(Long userRoleID) {
         this.userRoleID = userRoleID;
     }
 
@@ -91,11 +76,11 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public PurchaseOrSaleType getPurchaseOrSale() {
+    public int getPurchaseOrSale() {
         return purchaseOrSale;
     }
 
-    public void setPurchaseOrSale(PurchaseOrSaleType purchaseOrSale) {
+    public void setPurchaseOrSale(int purchaseOrSale) {
         this.purchaseOrSale = purchaseOrSale;
     }
 

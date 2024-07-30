@@ -1,6 +1,6 @@
 package com.web.MyCourseWeb.controllers;
 
-import com.web.MyCourseWeb.entities.Course;
+import com.web.MyCourseWeb.dtos.CourseDTO;
 import com.web.MyCourseWeb.services.CourseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,25 +18,26 @@ public class CourseController {
     }
 
     @GetMapping
-    public List<Course> getAllCourses() {
+    public List<CourseDTO> getAllCourses() {
         return courseService.getAllCourses();
     }
 
     @PostMapping
-    public Course createCourse(@RequestBody Course newCourse) {
-        return courseService.saveOneCourse(newCourse);
+    public ResponseEntity<CourseDTO> createCourse(@RequestBody CourseDTO newCourseDTO) {
+        CourseDTO courseDTO = courseService.saveOneCourse(newCourseDTO);
+        return ResponseEntity.ok(courseDTO);
     }
 
     @GetMapping("/{courseID}")
-    public ResponseEntity<Course> getOneCourse(@PathVariable Long courseID) {
-        Course course = courseService.getOneCourse(courseID);
-        return course != null ? ResponseEntity.ok(course) : ResponseEntity.notFound().build();
+    public ResponseEntity<CourseDTO> getOneCourse(@PathVariable Long courseID) {
+        CourseDTO courseDTO = courseService.getOneCourse(courseID);
+        return courseDTO != null ? ResponseEntity.ok(courseDTO) : ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{courseID}")
-    public ResponseEntity<Course> updateOneCourse(@PathVariable Long courseID, @RequestBody Course newCourse) {
-        Course updatedCourse = courseService.updateOneCourse(courseID, newCourse);
-        return updatedCourse != null ? ResponseEntity.ok(updatedCourse) : ResponseEntity.notFound().build();
+    public ResponseEntity<CourseDTO> updateOneCourse(@PathVariable Long courseID, @RequestBody CourseDTO newCourseDTO) {
+        CourseDTO updatedCourseDTO = courseService.updateOneCourse(courseID, newCourseDTO);
+        return updatedCourseDTO != null ? ResponseEntity.ok(updatedCourseDTO) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{courseID}")
@@ -46,8 +47,7 @@ public class CourseController {
     }
 
     @DeleteMapping
-    public void deleteAllUsers() {
+    public void deleteAllCourses() {
         courseService.deleteAllCourses();
     }
-
 }

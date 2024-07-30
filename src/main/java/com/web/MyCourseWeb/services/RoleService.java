@@ -1,11 +1,14 @@
 package com.web.MyCourseWeb.services;
 
+import com.web.MyCourseWeb.dtos.RoleDTO;
 import com.web.MyCourseWeb.entities.Role;
+import com.web.MyCourseWeb.mappers.RoleMapper;
 import com.web.MyCourseWeb.repos.RoleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RoleService {
@@ -16,25 +19,31 @@ public class RoleService {
         this.roleRepository = roleRepository;
     }
 
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+    public List<RoleDTO> getAllRoles() {
+        return roleRepository.findAll()
+                .stream()
+                .map(RoleMapper::toRoleDTO)
+                .collect(Collectors.toList());
     }
 
-    public Role saveOneRole(Role newRole) {
-        return roleRepository.save(newRole);
+    public RoleDTO saveOneRole(RoleDTO newRoleDTO) {
+        Role newRole = RoleMapper.toRole(newRoleDTO);
+        Role savedRole = roleRepository.save(newRole);
+        return RoleMapper.toRoleDTO(savedRole);
     }
 
-    public Role getOneRole(Long roleID) {
-        return roleRepository.findById(roleID).orElse(null);
+    public RoleDTO getOneRole(Long roleID) {
+        Role role = roleRepository.findById(roleID).orElse(null);
+        return RoleMapper.toRoleDTO(role);
     }
 
-    public Role updateOneRole(Long roleID, Role newRole) {
+    public RoleDTO updateOneRole(Long roleID, RoleDTO newRoleDTO) {
         Optional<Role> role = roleRepository.findById(roleID);
         if (role.isPresent()) {
             Role foundRole = role.get();
-            foundRole.setRoleType(newRole.getRoleType()); // roleType güncellemesi
-            roleRepository.save(foundRole);
-            return foundRole;
+            foundRole.setRoleType(newRoleDTO.getRoleType());
+            Role updatedRole = roleRepository.save(foundRole);
+            return RoleMapper.toRoleDTO(updatedRole);
         } else {
             return null;
         }

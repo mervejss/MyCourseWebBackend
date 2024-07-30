@@ -1,6 +1,6 @@
 package com.web.MyCourseWeb.controllers;
 
-import com.web.MyCourseWeb.entities.Role;
+import com.web.MyCourseWeb.dtos.RoleDTO;
 import com.web.MyCourseWeb.services.RoleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,24 +18,25 @@ public class RoleController {
     }
 
     @GetMapping
-    public List<Role> getAllRoles() {
+    public List<RoleDTO> getAllRoles() {
         return roleService.getAllRoles();
     }
 
     @PostMapping
-    public Role createRole(@RequestBody Role newRole) {
-        return roleService.saveOneRole(newRole);
+    public ResponseEntity<RoleDTO> createRole(@RequestBody RoleDTO newRoleDTO) {
+        RoleDTO createdRole = roleService.saveOneRole(newRoleDTO);
+        return ResponseEntity.ok(createdRole);
     }
 
     @GetMapping("/{roleID}")
-    public ResponseEntity<Role> getOneRole(@PathVariable Long roleID) {
-        Role role = roleService.getOneRole(roleID);
-        return role != null ? ResponseEntity.ok(role) : ResponseEntity.notFound().build();
+    public ResponseEntity<RoleDTO> getOneRole(@PathVariable Long roleID) {
+        RoleDTO roleDTO = roleService.getOneRole(roleID);
+        return roleDTO != null ? ResponseEntity.ok(roleDTO) : ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{roleID}")
-    public ResponseEntity<Role> updateOneRole(@PathVariable Long roleID, @RequestBody Role newRole) {
-        Role updatedRole = roleService.updateOneRole(roleID, newRole);
+    public ResponseEntity<RoleDTO> updateOneRole(@PathVariable Long roleID, @RequestBody RoleDTO newRoleDTO) {
+        RoleDTO updatedRole = roleService.updateOneRole(roleID, newRoleDTO);
         return updatedRole != null ? ResponseEntity.ok(updatedRole) : ResponseEntity.notFound().build();
     }
 
@@ -46,8 +47,8 @@ public class RoleController {
     }
 
     @DeleteMapping
-    public void deleteAllRoles() {
+    public ResponseEntity<Void> deleteAllRoles() {
         roleService.deleteAllRoles();
+        return ResponseEntity.noContent().build();
     }
-
 }

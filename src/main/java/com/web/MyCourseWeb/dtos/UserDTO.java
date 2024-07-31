@@ -9,23 +9,24 @@ public class UserDTO {
     private String userName;
     private String userMail;
     private String userPassword;
-    private int purchaseOrSale;  // Enum yerine int olarak tutulur.
     private Date createdAt;
 
     // Constructor
     public UserDTO() {}
 
     public UserDTO(Long userID, Long userRoleID, String userFullName, String userName,
-                   String userMail, String userPassword, int purchaseOrSale, Date createdAt) {
+                   String userMail, String userPassword, Date createdAt) {
         this.userID = userID;
         this.userRoleID = userRoleID;
         this.userFullName = userFullName;
         this.userName = userName;
         this.userMail = userMail;
         this.userPassword = userPassword;
-        this.purchaseOrSale = purchaseOrSale;
         this.createdAt = createdAt;
     }
+
+
+
 
     // Getters and Setters
     public Long getUserID() {
@@ -76,13 +77,6 @@ public class UserDTO {
         this.userPassword = userPassword;
     }
 
-    public int getPurchaseOrSale() {
-        return purchaseOrSale;
-    }
-
-    public void setPurchaseOrSale(int purchaseOrSale) {
-        this.purchaseOrSale = purchaseOrSale;
-    }
 
     public Date getCreatedAt() {
         return createdAt;

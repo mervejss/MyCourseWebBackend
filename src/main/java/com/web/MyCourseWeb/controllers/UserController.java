@@ -59,4 +59,19 @@ public class UserController {
         userService.deleteAllUsers();
         return ResponseEntity.noContent().build();
     }
+
+
+    @PostMapping("/register")
+    public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO newUserDTO) {
+        try {
+            UserDTO registeredUser = userService.registerUser(newUserDTO);
+            return ResponseEntity.ok(registeredUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+
+
+
 }

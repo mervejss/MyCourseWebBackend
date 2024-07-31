@@ -57,7 +57,6 @@ public class UserService {
             foundUser.setUserFullName(newUserDTO.getUserFullName());
             foundUser.setUserMail(newUserDTO.getUserMail());
             foundUser.setUserPassword(newUserDTO.getUserPassword());
-            foundUser.setPurchaseOrSale(User.PurchaseOrSaleType.values()[newUserDTO.getPurchaseOrSale()]);
             foundUser.setUserRoleID(role);
             User updatedUser = userRepository.save(foundUser);
             return UserMapper.toUserDTO(updatedUser);
@@ -73,4 +72,20 @@ public class UserService {
     public void deleteAllUsers() {
         userRepository.deleteAll();
     }
+
+    public UserDTO registerUser(UserDTO userDTO) {
+        System.out.println("Registering user: " + userDTO);
+
+        Role role = roleRepository.findById(userDTO.getUserRoleID())
+                .orElseThrow(() -> new IllegalArgumentException("Role not found with ID: " + userDTO.getUserRoleID()));
+
+        User user = UserMapper.toUser(userDTO, role);
+        User savedUser = userRepository.save(user);
+
+        System.out.println("User saved: " + savedUser);
+
+        return UserMapper.toUserDTO(savedUser);
+    }
+
+
 }

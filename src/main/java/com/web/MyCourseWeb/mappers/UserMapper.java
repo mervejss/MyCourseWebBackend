@@ -17,7 +17,6 @@ public class UserMapper {
                 user.getUserName(),
                 user.getUserMail(),
                 user.getUserPassword(),
-                user.getPurchaseOrSale().ordinal(),
                 user.getCreatedAt()
         );
     }
@@ -33,7 +32,6 @@ public class UserMapper {
         user.setUserName(userDTO.getUserName());
         user.setUserMail(userDTO.getUserMail());
         user.setUserPassword(userDTO.getUserPassword());
-        user.setPurchaseOrSale(User.PurchaseOrSaleType.values()[userDTO.getPurchaseOrSale()]);
         user.setCreatedAt(userDTO.getCreatedAt());
         return user;
     }

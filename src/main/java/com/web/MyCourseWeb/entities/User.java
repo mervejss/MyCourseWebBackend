@@ -27,14 +27,6 @@ public class User {
     private String userPassword;
 
 
-    @Enumerated(EnumType.ORDINAL)
-    private PurchaseOrSaleType purchaseOrSale; // Satın Alma veya Satış işlemi
-    //PurchaseOrSale classında türetilmiş postmanda request ve response larda bu veri int (0 veya 1 ) olarak gösterilmesi yeterli olacaktır bizim için.
-    public enum PurchaseOrSaleType {
-        PURCHASE, // Satın Alma
-        SALE      // Satış
-    }
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
@@ -91,13 +83,7 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public PurchaseOrSaleType getPurchaseOrSale() {
-        return purchaseOrSale;
-    }
 
-    public void setPurchaseOrSale(PurchaseOrSaleType purchaseOrSale) {
-        this.purchaseOrSale = purchaseOrSale;
-    }
 
     public Date getCreatedAt() {
         return createdAt;

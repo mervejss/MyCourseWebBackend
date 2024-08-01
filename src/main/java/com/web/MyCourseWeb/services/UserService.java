@@ -87,5 +87,15 @@ public class UserService {
         return UserMapper.toUserDTO(savedUser);
     }
 
+    public UserDTO loginUser(String email, String password) {
+        Optional<User> userOptional = userRepository.findByUserMail(email);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            if (user.getUserPassword().equals(password)) {  // Şifre doğrulaması
+                return UserMapper.toUserDTO(user);
+            }
+        }
+        return null;
+    }
 
 }

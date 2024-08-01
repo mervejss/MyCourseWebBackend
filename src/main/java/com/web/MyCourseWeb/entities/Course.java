@@ -40,6 +40,8 @@ public class Course {
 
     private Long coursePrice;
 
+    private int courseScore; // Yeni alan
+
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -47,6 +49,15 @@ public class Course {
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
+    }
+
+
+    public int getCourseScore() {
+        return courseScore;
+    }
+
+    public void setCourseScore(int courseScore) {
+        this.courseScore = courseScore;
     }
 
     public Long getCourseID() {

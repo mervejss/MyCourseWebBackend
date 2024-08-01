@@ -57,6 +57,8 @@ public class CourseService {
             foundCourse.setCourseDescription(newCourseDTO.getCourseDescription());
             foundCourse.setCourseTotalTime(newCourseDTO.getCourseTotalTime());
             foundCourse.setCoursePrice(newCourseDTO.getCoursePrice());
+            foundCourse.setCourseScore(newCourseDTO.getCourseScore());
+
 
             CourseCategory category = courseCategoryRepository.findById(newCourseDTO.getCourseCategoryID()).orElse(null);
             User user = userRepository.findById(newCourseDTO.getUserID()).orElse(null);
@@ -77,4 +79,7 @@ public class CourseService {
     public void deleteAllCourses() {
         courseRepository.deleteAll();
     }
+
+
+
 }

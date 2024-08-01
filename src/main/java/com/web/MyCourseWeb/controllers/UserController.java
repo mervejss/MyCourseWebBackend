@@ -71,6 +71,16 @@ public class UserController {
         }
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<UserDTO> loginUser(@RequestParam String email, @RequestParam String password) {
+        UserDTO userDTO = userService.loginUser(email, password);
+        if (userDTO != null) {
+            return ResponseEntity.ok(userDTO);
+        } else {
+            return ResponseEntity.status(401).body(null);  // Unauthorized
+        }
+    }
+
 
 
 

@@ -7,13 +7,34 @@ public class CourseDTO {
     private Long courseID;
     private Long courseCategoryID;
     private Long userID;
+    private String userFullName; // Yeni alan
+
     private String courseName;
     private String courseDescription;
     private Long courseTotalTime;
     private Long coursePrice;
+    private int courseScore; // Yeni alan
+
     private Date createdAt;
 
     // Getters and Setters
+
+
+    public String getUserFullName() {
+        return userFullName;
+    }
+
+    public void setUserFullName(String userFullName) {
+        this.userFullName = userFullName;
+    }
+
+    public int getCourseScore() {
+        return courseScore;
+    }
+
+    public void setCourseScore(int courseScore) {
+        this.courseScore = courseScore;
+    }
 
     public Long getCourseID() {
         return courseID;

@@ -17,9 +17,14 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @GetMapping
+    /*@GetMapping
     public List<CourseDTO> getAllCourses() {
         return courseService.getAllCourses();
+    }*/
+    @GetMapping
+    public ResponseEntity<List<CourseDTO>> getAllCoursesWithUserNames() {
+        List<CourseDTO> courses = courseService.getAllCourses();
+        return ResponseEntity.ok(courses);
     }
 
     @PostMapping
@@ -50,4 +55,5 @@ public class CourseController {
     public void deleteAllCourses() {
         courseService.deleteAllCourses();
     }
+
 }

@@ -16,6 +16,7 @@ public class CourseMapper {
         courseDTO.setCourseID(course.getCourseID());
         courseDTO.setCourseCategoryID(course.getCourseCategoryID() != null ? course.getCourseCategoryID().getCourseCategoryID() : null);
         courseDTO.setUserID(course.getUserID() != null ? course.getUserID().getUserID() : null);
+        courseDTO.setUserFullName(course.getUserID() != null ? course.getUserID().getUserFullName() : null); // Yeni
 
         courseDTO.setCourseName(course.getCourseName());
         courseDTO.setCourseDescription(course.getCourseDescription());

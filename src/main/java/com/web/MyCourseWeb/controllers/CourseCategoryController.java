@@ -55,4 +55,16 @@ public class CourseCategoryController {
     public void deleteAllCourseCategories() {
         courseCategoryService.deleteAllCourseCategories();
     }
+
+
+    @GetMapping("/mainCategories")
+    public List<CourseCategoryDTO> getMainCategories() {
+        return courseCategoryService.getMainCategories();
+    }
+
+    @GetMapping("/subCategories/{parentCategoryID}")
+    public List<CourseCategoryDTO> getSubCategories(@PathVariable Long parentCategoryID) {
+        return courseCategoryService.getSubCategories(parentCategoryID);
+    }
+
 }

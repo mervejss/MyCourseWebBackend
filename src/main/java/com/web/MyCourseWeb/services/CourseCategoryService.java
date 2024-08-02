@@ -73,4 +73,19 @@ public class CourseCategoryService {
         if (parentCategoryID == null) return null;
         return courseCategoryRepository.findById(parentCategoryID).orElse(null);
     }
+
+    public List<CourseCategoryDTO> getMainCategories() {
+        return courseCategoryRepository.findByParentCategoryIsNull()
+                .stream()
+                .map(CourseCategoryMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<CourseCategoryDTO> getSubCategories(Long parentCategoryID) {
+        return courseCategoryRepository.findByParentCategory_CourseCategoryID(parentCategoryID)
+                .stream()
+                .map(CourseCategoryMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
 }

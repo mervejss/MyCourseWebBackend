@@ -22,25 +22,15 @@ public class Course {
     @JoinColumn(name = "userID", referencedColumnName = "userID")
     private User userID; // User tablosundaki userID ile ilişkilendirilmiş
 
-    public CourseCategory getCourseCategoryID() {
-        return courseCategoryID;
-    }
-
-    public void setCourseCategoryID(CourseCategory courseCategoryID) {
-        this.courseCategoryID = courseCategoryID;
-    }
-
-
-
     private String courseName;
 
     private String courseDescription;
 
-    private Long courseTotalTime; // Yeni sütun
+    private Long courseTotalTime;
 
     private Long coursePrice;
 
-    private int courseScore; // Yeni alan
+    private int courseScore;
 
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -51,6 +41,13 @@ public class Course {
         createdAt = new Date();
     }
 
+    public CourseCategory getCourseCategoryID() {
+        return courseCategoryID;
+    }
+
+    public void setCourseCategoryID(CourseCategory courseCategoryID) {
+        this.courseCategoryID = courseCategoryID;
+    }
 
     public int getCourseScore() {
         return courseScore;

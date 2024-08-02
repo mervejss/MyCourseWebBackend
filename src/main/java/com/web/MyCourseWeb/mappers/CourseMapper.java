@@ -16,13 +16,11 @@ public class CourseMapper {
         courseDTO.setCourseID(course.getCourseID());
         courseDTO.setCourseCategoryID(course.getCourseCategoryID() != null ? course.getCourseCategoryID().getCourseCategoryID() : null);
         courseDTO.setUserID(course.getUserID() != null ? course.getUserID().getUserID() : null);
-        courseDTO.setUserFullName(course.getUserID() != null ? course.getUserID().getUserFullName() : null); // Yeni
-
         courseDTO.setCourseName(course.getCourseName());
         courseDTO.setCourseDescription(course.getCourseDescription());
         courseDTO.setCourseTotalTime(course.getCourseTotalTime());
         courseDTO.setCoursePrice(course.getCoursePrice());
-        courseDTO.setCourseScore(course.getCourseScore()); // Yeni alan
+        courseDTO.setCourseScore(course.getCourseScore());
 
         courseDTO.setCreatedAt(course.getCreatedAt());
 
@@ -42,7 +40,7 @@ public class CourseMapper {
         course.setCourseDescription(courseDTO.getCourseDescription());
         course.setCourseTotalTime(courseDTO.getCourseTotalTime());
         course.setCoursePrice(courseDTO.getCoursePrice());
-        course.setCourseScore(courseDTO.getCourseScore()); // Yeni alan
+        course.setCourseScore(courseDTO.getCourseScore());
 
         course.setCreatedAt(courseDTO.getCreatedAt());
 

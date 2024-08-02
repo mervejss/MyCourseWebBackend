@@ -7,7 +7,7 @@ public class CourseDTO {
     private Long courseID;
     private Long courseCategoryID;
     private Long userID;
-    private String userFullName; // Yeni alan
+    //private String userFullName; // Yeni alan
 
     private String courseName;
     private String courseDescription;
@@ -17,17 +17,34 @@ public class CourseDTO {
 
     private Date createdAt;
 
+    //private String mainCategoryName; // Yeni alan
+    //private String subCategoryName;  // Yeni alan
+
     // Getters and Setters
 
-
-    public String getUserFullName() {
-        return userFullName;
-    }
-
-    public void setUserFullName(String userFullName) {
-        this.userFullName = userFullName;
-    }
-
+//    public String getUserFullName() {
+//        return userFullName;
+//    }
+//
+//    public void setUserFullName(String userFullName) {
+//        this.userFullName = userFullName;
+//    }
+//
+//    public String getMainCategoryName() {
+//        return mainCategoryName;
+//    }
+//
+//    public void setMainCategoryName(String mainCategoryName) {
+//        this.mainCategoryName = mainCategoryName;
+//    }
+//
+//    public String getSubCategoryName() {
+//        return subCategoryName;
+//    }
+//
+//    public void setSubCategoryName(String subCategoryName) {
+//        this.subCategoryName = subCategoryName;
+//    }
     public int getCourseScore() {
         return courseScore;
     }
@@ -99,4 +116,6 @@ public class CourseDTO {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
+
 }

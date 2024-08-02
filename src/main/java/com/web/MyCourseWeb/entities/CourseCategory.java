@@ -29,6 +29,7 @@ public class CourseCategory {
     }
 
 
+
     public Long getCourseCategoryID() {
         return courseCategoryID;
     }

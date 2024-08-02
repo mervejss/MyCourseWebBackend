@@ -17,10 +17,6 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    /*@GetMapping
-    public List<CourseDTO> getAllCourses() {
-        return courseService.getAllCourses();
-    }*/
     @GetMapping
     public ResponseEntity<List<CourseDTO>> getAllCoursesWithUserNames() {
         List<CourseDTO> courses = courseService.getAllCourses();
@@ -55,5 +51,7 @@ public class CourseController {
     public void deleteAllCourses() {
         courseService.deleteAllCourses();
     }
+
+
 
 }

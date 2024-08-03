@@ -81,5 +81,16 @@ public class CourseService {
     }
 
 
+    public Optional<Course> getCourseDetails(Long courseId) {
+        return courseRepository.findById(courseId);
+    }
+
+    public Optional<CourseCategory> getCourseCategory(Long courseCategoryId) {
+        return courseCategoryRepository.findById(courseCategoryId);
+    }
+
+    public Optional<User> getUser(Long userId) {
+        return userRepository.findById(userId);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.web.MyCourseWeb.controllers;
 
 import com.web.MyCourseWeb.dtos.UserDTO;
+import com.web.MyCourseWeb.dtos.UserWithRoleTypeDTO;
 import com.web.MyCourseWeb.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -81,6 +82,11 @@ public class UserController {
         }
     }
 
+    @GetMapping("/{userID}/profile")
+    public ResponseEntity<UserWithRoleTypeDTO> getUserProfile(@PathVariable Long userID) {
+        UserWithRoleTypeDTO userProfile = userService.getUserProfile(userID);
+        return userProfile != null ? ResponseEntity.ok(userProfile) : ResponseEntity.notFound().build();
+    }
 
 
 

@@ -1,6 +1,7 @@
 package com.web.MyCourseWeb.services;
 
 import com.web.MyCourseWeb.dtos.UserDTO;
+import com.web.MyCourseWeb.dtos.UserWithRoleTypeDTO;
 import com.web.MyCourseWeb.entities.Role;
 import com.web.MyCourseWeb.entities.User;
 import com.web.MyCourseWeb.mappers.UserMapper;
@@ -98,4 +99,20 @@ public class UserService {
         return null;
     }
 
+
+    public UserWithRoleTypeDTO getUserProfile(Long userID) {
+        User user = userRepository.findById(userID).orElse(null);
+        if (user == null) {
+            return null;
+        }
+        Role.RoleType roleType = user.getUserRoleID().getRoleType();
+        return new UserWithRoleTypeDTO(
+                user.getUserID(),
+                user.getUserFullName(),
+                user.getUserName(),
+                user.getUserMail(),
+                roleType.name(),  // Enum'u String'e dönüştürme
+                user.getCreatedAt()
+        );
+    }
 }

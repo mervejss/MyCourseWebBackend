@@ -8,18 +8,40 @@ public class UserWithRoleTypeDTO {
     private String userFullName;
     private String userName;
     private String userMail;
-    private String roleType;
-    private LocalDateTime createdAt;
+    private String userPassword;
 
-    public UserWithRoleTypeDTO(Long userID, String userFullName, String userName, String userMail, String roleType, Date createdAt) {
+    private String roleType;
+    private Date createdAt;  // Bu alanın DTO'ya dahil olduğundan emin olun
+
+    public UserWithRoleTypeDTO(Long userID, String userFullName, String userName, String userMail, String userPassword, String roleType, Date createdAt) {
         this.userID = userID;
         this.userFullName = userFullName;
         this.userName = userName;
         this.userMail = userMail;
+        this.userPassword = userPassword;
         this.roleType = roleType;
+        this.createdAt = createdAt;
+
     }
 
     // Getters and Setters
+
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 
     public Long getUserID() {
         return userID;

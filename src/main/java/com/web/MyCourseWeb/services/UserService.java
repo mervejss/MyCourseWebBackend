@@ -111,8 +111,11 @@ public class UserService {
                 user.getUserFullName(),
                 user.getUserName(),
                 user.getUserMail(),
+                user.getUserPassword(),
+
                 roleType.name(),  // Enum'u String'e dönüştürme
                 user.getCreatedAt()
+
         );
     }
 }

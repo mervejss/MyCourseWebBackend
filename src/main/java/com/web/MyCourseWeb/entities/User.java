@@ -1,5 +1,6 @@
 package com.web.MyCourseWeb.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Date;
@@ -28,6 +29,7 @@ public class User {
 
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date createdAt;
 
     @PrePersist

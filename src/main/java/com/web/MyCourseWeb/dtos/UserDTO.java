@@ -77,7 +77,6 @@ public class UserDTO {
         this.userPassword = userPassword;
     }
 
-
     public Date getCreatedAt() {
         return createdAt;
     }

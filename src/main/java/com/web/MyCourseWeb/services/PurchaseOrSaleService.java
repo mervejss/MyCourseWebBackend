@@ -53,7 +53,7 @@ public class PurchaseOrSaleService {
         Optional<Course> course = courseRepository.findById(newTransactionDTO.getCourseID());
 
         if (user.isPresent() && course.isPresent()) {
-            newTransaction.setUser(user.get());
+            newTransaction.setUserID(user.get());
             newTransaction.setCourseID(course.get());
         } else {
             throw new RuntimeException("User or Course not found with ID: " + newTransactionDTO.getUserID() + " or " + newTransactionDTO.getCourseID());
@@ -76,7 +76,7 @@ public class PurchaseOrSaleService {
             Optional<Course> course = courseRepository.findById(newTransactionDTO.getCourseID());
 
             if (user.isPresent() && course.isPresent()) {
-                existingTransaction.setUser(user.get());
+                existingTransaction.setUserID(user.get());
                 existingTransaction.setCourseID(course.get());
             } else {
                 throw new RuntimeException("User or Course not found with ID: " + newTransactionDTO.getUserID() + " or " + newTransactionDTO.getCourseID());

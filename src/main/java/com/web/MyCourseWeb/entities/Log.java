@@ -22,12 +22,14 @@ public class Log {
     private LogAction LogAction; // LogAction durumu
 
     public enum LogAction {
-        LOGIN,           // Giriş
-        LOGOUT,          // Çıkış
-        PURCHASE,        // Satın Alma
-        SALE,            // Satış Yapma
-        COURSE_PROGRESS  // Kurs İlerlemesi
-    }
+        LOGIN,           // 0 Giriş
+        LOGOUT,          // 1 Çıkış
+        PURCHASE,        // 2 Satın Alma
+        SALE,            // 3 Satış Yapma
+        COURSE_PROGRESS,  // 4 Kurs İlerlemesi
+        AUTO_LOGIN       // 5 Otomatik Giriş
+
+        }
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;

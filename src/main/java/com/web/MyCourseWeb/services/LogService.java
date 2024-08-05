@@ -7,6 +7,7 @@ import com.web.MyCourseWeb.mappers.LogMapper;
 import com.web.MyCourseWeb.repos.LogRepository;
 import com.web.MyCourseWeb.repos.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -84,5 +85,25 @@ public class LogService {
     // Tüm logları sil
     public void deleteAllLogs() {
         logRepository.deleteAll();
+    }
+
+    // Belirli bir kullanıcının loglarını getir
+    public List<LogDTO> getLogsByUser(Long userID) {
+        return logRepository.findByUserID_UserID(userID).stream()
+                .map(LogMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void addLogEntry(Long userID, Log.LogAction logAction) {
+        Log log = new Log();
+
+        // Kullanıcıyı UserRepository üzerinden al
+        User user = userRepository.findById(userID).orElseThrow(() -> new RuntimeException("User not found"));
+        log.setUserID(user);
+        log.setLogAction(logAction);
+        log.setCreatedAt(new Date());
+
+        logRepository.save(log);
     }
 }

@@ -55,4 +55,11 @@ public class LogController {
     public void deleteAllLogs() {
         logService.deleteAllLogs();
     }
+
+    // Belirli bir kullanıcının loglarını getir
+    @GetMapping("/user/{userID}")
+    public List<LogDTO> getLogsByUser(@PathVariable Long userID) {
+        return logService.getLogsByUser(userID);
+    }
+
 }

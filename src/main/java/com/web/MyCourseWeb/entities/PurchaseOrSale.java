@@ -16,7 +16,7 @@ public class PurchaseOrSale {
 
     @ManyToOne
     @JoinColumn(name = "userID", referencedColumnName = "userID")
-    private User user; // User tablosundaki userID ile ilişkilendirilmiş//BU KISIM postmanda long  olarak tutulacak
+    private User userID; // User tablosundaki userID ile ilişkilendirilmiş//BU KISIM postmanda long  olarak tutulacak
 
     @ManyToOne
     @JoinColumn(name = "courseID", referencedColumnName = "courseID")
@@ -80,12 +80,12 @@ public class PurchaseOrSale {
         this.purchaseOrSaleID = purchaseOrSaleID;
     }
 
-    public User getUser() {
-        return user;
+    public User getUserID() {
+        return userID;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserID(User userID) {
+        this.userID = userID;
     }
 
     public Course getCourseID() {

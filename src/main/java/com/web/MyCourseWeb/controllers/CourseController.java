@@ -68,6 +68,9 @@ public class CourseController {
             Course course = courseOpt.get();
             response.put("courseName", course.getCourseName());
             response.put("courseDescription", course.getCourseDescription());
+            response.put("courseTotalTime", course.getCourseTotalTime());
+            response.put("coursePrice", course.getCoursePrice());
+            response.put("courseScore", course.getCourseScore());
 
             Optional<CourseCategory> categoryOpt = courseService.getCourseCategory(course.getCourseCategoryID().getCourseCategoryID());
             categoryOpt.ifPresent(courseCategory -> {

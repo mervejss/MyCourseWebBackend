@@ -10,7 +10,7 @@ public class PurchaseOrSaleMapper {
     public static PurchaseOrSaleDTO toDTO(PurchaseOrSale purchaseOrSale) {
         PurchaseOrSaleDTO dto = new PurchaseOrSaleDTO();
         dto.setPurchaseOrSaleID(purchaseOrSale.getPurchaseOrSaleID());
-        dto.setUserID(purchaseOrSale.getUser().getUserID());
+        dto.setUserID(purchaseOrSale.getUserID().getUserID());
         dto.setCourseID(purchaseOrSale.getCourseID().getCourseID());
         dto.setTransactionType(purchaseOrSale.getTransactionType().ordinal());
         dto.setStatus(purchaseOrSale.getStatus().ordinal());
@@ -24,7 +24,7 @@ public class PurchaseOrSaleMapper {
 
         User user = new User();
         user.setUserID(dto.getUserID());
-        entity.setUser(user);
+        entity.setUserID(user);
 
         Course course = new Course();
         course.setCourseID(dto.getCourseID());

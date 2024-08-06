@@ -1,6 +1,7 @@
 package com.web.MyCourseWeb.controllers;
 
 import com.web.MyCourseWeb.dtos.PurchaseOrSaleDTO;
+
 import com.web.MyCourseWeb.services.PurchaseOrSaleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,4 +56,6 @@ public class PurchaseOrSaleController {
     public void deleteAllPurchaseOrSale() {
         purchaseOrSaleService.deleteAllPurchaseOrSale();
     }
+
+
 }

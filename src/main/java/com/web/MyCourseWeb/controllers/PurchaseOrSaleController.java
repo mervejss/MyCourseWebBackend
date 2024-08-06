@@ -73,5 +73,4 @@ public class PurchaseOrSaleController {
         PurchaseOrSaleDTO updatedTransactionDTO = purchaseOrSaleService.updateTransactionStatus(transactionID, status);
         return updatedTransactionDTO != null ? ResponseEntity.ok(updatedTransactionDTO) : ResponseEntity.notFound().build();
     }
-
 }

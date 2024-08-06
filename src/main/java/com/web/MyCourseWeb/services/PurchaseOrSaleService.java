@@ -81,8 +81,9 @@ public class PurchaseOrSaleService {
             } else {
                 throw new RuntimeException("User or Course not found with ID: " + newTransactionDTO.getUserID() + " or " + newTransactionDTO.getCourseID());
             }
-
-            existingTransaction.setCreatedAt(new Date()); // Optional, as @PrePersist will handle this
+            // Güncelleme tarihi güncellenir
+            existingTransaction.setUpdatedAt(new Date());
+            //existingTransaction.setCreatedAt(new Date()); // Optional, as @PrePersist will handle this
             return PurchaseOrSaleMapper.toDTO(purchaseOrSaleRepository.save(existingTransaction));
         }
         return null;
@@ -97,4 +98,29 @@ public class PurchaseOrSaleService {
     public void deleteAllPurchaseOrSale() {
         purchaseOrSaleRepository.deleteAll();
     }
+
+    // Kullanıcı ID'sine göre işlemleri getir
+    // Kullanıcı ID'sine göre işlemleri getir
+    public List<PurchaseOrSaleDTO> getTransactionsByUserID(Long userID) {
+        Optional<User> user = userRepository.findById(userID);
+        if (user.isPresent()) {
+            return purchaseOrSaleRepository.findByUserID(user.get()).stream()
+                    .map(PurchaseOrSaleMapper::toDTO)
+                    .collect(Collectors.toList());
+        } else {
+            return List.of(); // Kullanıcı bulunamazsa boş liste döner
+        }
+    }
+
+    public PurchaseOrSaleDTO updateTransactionStatus(Long transactionID, int status) {
+        Optional<PurchaseOrSale> optionalTransaction = purchaseOrSaleRepository.findById(transactionID);
+        if (optionalTransaction.isPresent()) {
+            PurchaseOrSale existingTransaction = optionalTransaction.get();
+            existingTransaction.setStatus(PurchaseOrSale.Status.values()[status]);
+            existingTransaction.setUpdatedAt(new Date());
+            return PurchaseOrSaleMapper.toDTO(purchaseOrSaleRepository.save(existingTransaction));
+        }
+        return null;
+    }
+
 }

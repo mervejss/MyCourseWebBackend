@@ -57,5 +57,22 @@ public class PurchaseOrSaleController {
         purchaseOrSaleService.deleteAllPurchaseOrSale();
     }
 
+    // Belirli bir kullanıcıya ait tüm işlemleri getir
+    // Belirli bir kullanıcıya ait tüm işlemleri getir
+    @GetMapping("/user")
+    public List<PurchaseOrSaleDTO> getTransactionsByUserID(@RequestParam Long userID) {
+        return purchaseOrSaleService.getTransactionsByUserID(userID);
+    }
+
+    // Update status of a transaction
+    @PatchMapping("/{transactionID}/status")
+    public ResponseEntity<PurchaseOrSaleDTO> updateTransactionStatus(
+            @PathVariable Long transactionID,
+            @RequestParam int status) {
+        System.out.println("Received status update: " + status); // Debugging
+        PurchaseOrSaleDTO updatedTransactionDTO = purchaseOrSaleService.updateTransactionStatus(transactionID, status);
+        return updatedTransactionDTO != null ? ResponseEntity.ok(updatedTransactionDTO) : ResponseEntity.notFound().build();
+    }
+
 
 }

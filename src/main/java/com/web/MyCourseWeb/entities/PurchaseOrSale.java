@@ -36,9 +36,15 @@ public class PurchaseOrSale {
         PURCHASE, SALE
     }
 
-    //COMPLETED=0, PENDING=1,CANCELED =2 gibi düşünebiliriz.//BU KISIM postmanda  0,1,2,3,4 gibi int olarak tutulacak
+    //RECEIVED=0, CONFIRMED=1,PREPARING =2 gibi düşünebiliriz.//BU KISIM postmanda  0,1,2,3,4 gibi int olarak tutulacak
     public enum Status {
-        COMPLETED, PENDING, CANCELED
+
+        RECEIVED,
+        CONFIRMED,
+        PREPARING,
+        PENDING,
+        COMPLETED,
+        CANCELED
     }
 
     public enum PaymentMethod { //BU KISIM postmanda  0,1,2,3,4 gibi int olarak tutulacak
@@ -62,6 +68,22 @@ public class PurchaseOrSale {
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Date getCreatedAt() {

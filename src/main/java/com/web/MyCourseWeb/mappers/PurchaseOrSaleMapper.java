@@ -15,6 +15,9 @@ public class PurchaseOrSaleMapper {
         dto.setTransactionType(purchaseOrSale.getTransactionType().ordinal());
         dto.setStatus(purchaseOrSale.getStatus().ordinal());
         dto.setPaymentMethod(purchaseOrSale.getPaymentMethod().ordinal());
+        dto.setCreatedAt(purchaseOrSale.getCreatedAt()); // Tarihi ekleyin
+        dto.setUpdatedAt(purchaseOrSale.getUpdatedAt());
+
         return dto;
     }
 
@@ -33,6 +36,8 @@ public class PurchaseOrSaleMapper {
         entity.setTransactionType(PurchaseOrSale.TransactionType.values()[dto.getTransactionType()]);
         entity.setStatus(PurchaseOrSale.Status.values()[dto.getStatus()]);
         entity.setPaymentMethod(PurchaseOrSale.PaymentMethod.values()[dto.getPaymentMethod()]);
+        entity.setCreatedAt(dto.getCreatedAt());
+        entity.setUpdatedAt(dto.getUpdatedAt());
         return entity;
     }
 }

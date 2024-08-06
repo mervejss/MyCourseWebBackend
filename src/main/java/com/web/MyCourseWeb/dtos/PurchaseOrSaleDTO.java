@@ -10,8 +10,27 @@ public class PurchaseOrSaleDTO {
     private Integer transactionType; // Enum değerini int olarak temsil eder
     private Integer status; // Enum değerini int olarak temsil eder
     private Integer paymentMethod; // Enum değerini int olarak temsil eder
+    private Date createdAt; // Eklenen tarih alanı
+    private Date updatedAt;
 
     // Getter ve Setter'lar
+
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 
     public Long getPurchaseOrSaleID() {
         return purchaseOrSaleID;

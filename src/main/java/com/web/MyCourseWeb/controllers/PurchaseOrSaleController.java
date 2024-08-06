@@ -74,5 +74,4 @@ public class PurchaseOrSaleController {
         return updatedTransactionDTO != null ? ResponseEntity.ok(updatedTransactionDTO) : ResponseEntity.notFound().build();
     }
 
-
 }

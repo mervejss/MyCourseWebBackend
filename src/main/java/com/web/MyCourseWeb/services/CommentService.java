@@ -72,4 +72,33 @@ public class CommentService {
     public void deleteAllComments() {
         commentRepository.deleteAll();
     }
+
+    // Var olan bir yorumu kontrol et ve gerekirse güncelle
+    public CommentDTO saveOrUpdateComment(CommentDTO commentDTO) {
+        Optional<Comment> existingCommentOpt = commentRepository.findByUserID_UserIDAndCourseID_CourseID(
+                commentDTO.getUserID(), commentDTO.getCourseID());
+
+        Comment comment;
+        if (existingCommentOpt.isPresent()) {
+            // Yorum var, güncelle
+            comment = existingCommentOpt.get();
+            comment.setCommentDescription(commentDTO.getCommentDescription());
+            comment.setCommentScore(commentDTO.getCommentScore());
+            comment.setUpdatedAt(new Date());
+        } else {
+            // Yorum yok, yeni oluştur
+            comment = CommentMapper.toEntity(commentDTO);
+            comment.setCreatedAt(new Date());
+            comment.setUpdatedAt(new Date());
+        }
+
+        return CommentMapper.toDTO(commentRepository.save(comment));
+    }
+
+    // Kullanıcı ve kurs ID'sine göre yorum getir
+    public Optional<CommentDTO> getCommentByUserAndCourse(Long userID, Long courseID) {
+        return commentRepository.findByUserID_UserIDAndCourseID_CourseID(userID, courseID)
+                .map(CommentMapper::toDTO);
+    }
+
 }

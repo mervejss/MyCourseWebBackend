@@ -5,6 +5,7 @@ import com.web.MyCourseWeb.services.CommentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/comments")
@@ -53,5 +54,18 @@ public class CommentController {
     }
 
 
+    // Yorum ekle veya güncelle
+    @PostMapping("/saveOrUpdate")
+    public CommentDTO saveOrUpdateComment(@RequestBody CommentDTO commentDTO) {
+        return commentService.saveOrUpdateComment(commentDTO);
+    }
+
+
+    // Kullanıcı ve kurs ID'sine göre yorum getir
+    @GetMapping("/user/{userID}/course/{courseID}")
+    public CommentDTO getCommentByUserAndCourse(@PathVariable Long userID, @PathVariable Long courseID) {
+        Optional<CommentDTO> commentDTO = commentService.getCommentByUserAndCourse(userID, courseID);
+        return commentDTO.orElse(new CommentDTO()); // Eğer yorum bulunamazsa boş bir DTO döndür
+    }
 
 }

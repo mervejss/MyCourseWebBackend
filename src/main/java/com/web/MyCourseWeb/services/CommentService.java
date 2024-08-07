@@ -107,4 +107,11 @@ public class CommentService {
                 .map(CommentMapper::toDTO);
     }
 
+    public List<CommentDTO> getCommentsByUser(Long userID) {
+        return commentRepository.findByUserID_UserID(userID).stream()
+                .map(CommentMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+
 }

@@ -68,4 +68,10 @@ public class CommentController {
         return commentDTO.orElse(new CommentDTO()); // Eğer yorum bulunamazsa boş bir DTO döndür
     }
 
+
+    @GetMapping("/user/{userID}/course")
+    public List<CommentDTO> getCommentsByUser(@PathVariable Long userID) {
+        return commentService.getCommentsByUser(userID);
+    }
+
 }

@@ -1,10 +1,12 @@
 package com.web.MyCourseWeb.services;
 
 import com.web.MyCourseWeb.dtos.CourseDTO;
+import com.web.MyCourseWeb.entities.Comment;
 import com.web.MyCourseWeb.entities.Course;
 import com.web.MyCourseWeb.entities.CourseCategory;
 import com.web.MyCourseWeb.entities.User;
 import com.web.MyCourseWeb.mappers.CourseMapper;
+import com.web.MyCourseWeb.repos.CommentRepository;
 import com.web.MyCourseWeb.repos.CourseCategoryRepository;
 import com.web.MyCourseWeb.repos.CourseRepository;
 import com.web.MyCourseWeb.repos.UserRepository;
@@ -20,9 +22,11 @@ public class CourseService {
     private final CourseRepository courseRepository;
     private final CourseCategoryRepository courseCategoryRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository; // CommentRepository ekleyin
 
-    public CourseService(CourseRepository courseRepository, CourseCategoryRepository courseCategoryRepository, UserRepository userRepository) {
+    public CourseService(CourseRepository courseRepository, CommentRepository commentRepository, CourseCategoryRepository courseCategoryRepository, UserRepository userRepository) {
         this.courseRepository = courseRepository;
+        this.commentRepository = commentRepository; // CommentRepository'yi initialize edin
         this.courseCategoryRepository = courseCategoryRepository;
         this.userRepository = userRepository;
     }
@@ -91,6 +95,26 @@ public class CourseService {
 
     public Optional<User> getUser(Long userId) {
         return userRepository.findById(userId);
+    }
+
+
+
+    // Ortalama puanı hesaplayan metod
+    public void updateCourseScore(Long courseID) {
+        List<Comment> comments = commentRepository.findByCourseID_CourseID(courseID);
+        if (comments.isEmpty()) {
+            return; // Yorum yoksa işlem yapmayın
+        }
+        double averageScore = comments.stream()
+                .mapToInt(Comment::getCommentScore)
+                .average()
+                .orElse(0.0);
+
+        Course course = courseRepository.findById(courseID).orElse(null);
+        if (course != null) {
+            course.setCourseScore((int) Math.round(averageScore)); // Ortalama puanı yuvarlayarak güncelle
+            courseRepository.save(course); // Kursu güncelle
+        }
     }
 
 }

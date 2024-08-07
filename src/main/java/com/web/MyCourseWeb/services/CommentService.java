@@ -17,9 +17,11 @@ import java.util.stream.Collectors;
 public class CommentService {
 
     private final CommentRepository commentRepository;
+    private final CourseService courseService; // CourseService'yi ekleyin
 
-    public CommentService(CommentRepository commentRepository) {
+    public CommentService(CommentRepository commentRepository, CourseService courseService) {
         this.commentRepository = commentRepository;
+        this.courseService = courseService; // CourseService'yi initialize edin
     }
 
     // Tüm yorumları getir
@@ -92,7 +94,11 @@ public class CommentService {
             comment.setUpdatedAt(new Date());
         }
 
-        return CommentMapper.toDTO(commentRepository.save(comment));
+        Comment savedComment = commentRepository.save(comment);
+        // Kursun skorunu güncelle
+        courseService.updateCourseScore(commentDTO.getCourseID());
+
+        return CommentMapper.toDTO(savedComment);
     }
 
     // Kullanıcı ve kurs ID'sine göre yorum getir

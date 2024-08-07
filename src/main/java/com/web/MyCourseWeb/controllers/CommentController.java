@@ -51,4 +51,7 @@ public class CommentController {
     public void deleteAllComments() {
         commentService.deleteAllComments();
     }
+
+
+
 }

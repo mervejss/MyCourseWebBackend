@@ -94,4 +94,17 @@ public class CourseController {
     }
 
 
+    @GetMapping("/user/{courseID}")
+    public ResponseEntity<Long> getCourseOwner(@PathVariable Long courseID) {
+        Optional<Course> courseOpt = courseService.getCourseDetails(courseID);
+        if (courseOpt.isPresent()) {
+            Course course = courseOpt.get();
+            Long ownerID = course.getUserID().getUserID();
+            return ResponseEntity.ok(ownerID);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }

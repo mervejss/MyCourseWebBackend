@@ -100,7 +100,6 @@ public class PurchaseOrSaleService {
     }
 
     // Kullanıcı ID'sine göre işlemleri getir
-    // Kullanıcı ID'sine göre işlemleri getir
     public List<PurchaseOrSaleDTO> getTransactionsByUserID(Long userID) {
         Optional<User> user = userRepository.findById(userID);
         if (user.isPresent()) {

@@ -58,7 +58,6 @@ public class PurchaseOrSaleController {
     }
 
     // Belirli bir kullanıcıya ait tüm işlemleri getir
-    // Belirli bir kullanıcıya ait tüm işlemleri getir
     @GetMapping("/user")
     public List<PurchaseOrSaleDTO> getTransactionsByUserID(@RequestParam Long userID) {
         return purchaseOrSaleService.getTransactionsByUserID(userID);

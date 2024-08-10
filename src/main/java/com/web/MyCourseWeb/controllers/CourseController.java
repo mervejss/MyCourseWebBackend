@@ -107,4 +107,12 @@ public class CourseController {
     }
 
 
+    @GetMapping("/courses/byCategory/{categoryId}")
+    public ResponseEntity<List<CourseDTO>> getCoursesByCategory(@PathVariable Long categoryId) {
+        List<CourseDTO> courses = courseService.getCoursesByCategory(categoryId);
+        return ResponseEntity.ok(courses);
+    }
+
+
+
 }

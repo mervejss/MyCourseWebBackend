@@ -117,4 +117,11 @@ public class CourseService {
         }
     }
 
+    public List<CourseDTO> getCoursesByCategory(Long categoryId) {
+        return courseRepository.findByCourseCategoryID_CourseCategoryID(categoryId)
+                .stream()
+                .map(CourseMapper::toCourseDTO)
+                .collect(Collectors.toList());
+    }
+
 }

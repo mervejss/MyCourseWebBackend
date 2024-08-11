@@ -23,6 +23,18 @@ public class CourseProgress {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();

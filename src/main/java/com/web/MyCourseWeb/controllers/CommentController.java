@@ -74,4 +74,11 @@ public class CommentController {
         return commentService.getCommentsByUser(userID);
     }
 
+
+    @GetMapping("/course/{courseID}")
+    public List<CommentDTO> getCommentsByCourse(@PathVariable Long courseID) {
+        return commentService.getCommentsByCourse(courseID);
+    }
+
+
 }

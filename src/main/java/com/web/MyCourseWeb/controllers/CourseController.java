@@ -66,6 +66,8 @@ public class CourseController {
         Optional<Course> courseOpt = courseService.getCourseDetails(courseId);
         if (courseOpt.isPresent()) {
             Course course = courseOpt.get();
+            response.put("courseID", course.getCourseID());
+
             response.put("courseName", course.getCourseName());
             response.put("courseDescription", course.getCourseDescription());
             response.put("courseTotalTime", course.getCourseTotalTime());

@@ -114,4 +114,11 @@ public class CommentService {
     }
 
 
+    public List<CommentDTO> getCommentsByCourse(Long courseID) {
+        return commentRepository.findByCourseID_CourseID(courseID).stream()
+                .map(CommentMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+
 }

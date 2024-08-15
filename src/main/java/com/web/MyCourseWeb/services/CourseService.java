@@ -124,4 +124,10 @@ public class CourseService {
                 .collect(Collectors.toList());
     }
 
+    public List<CourseDTO> getCoursesByUserID(Long userID) {
+        return courseRepository.findByUserID_UserID(userID)
+                .stream()
+                .map(CourseMapper::toCourseDTO)
+                .collect(Collectors.toList());
+    }
 }

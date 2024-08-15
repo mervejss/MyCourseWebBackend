@@ -9,5 +9,6 @@ import java.util.List;
 public interface CourseRepository extends JpaRepository<Course,Long> {
 
     List<Course> findByCourseCategoryID_CourseCategoryID(Long courseCategoryID);
+    List<Course> findByUserID_UserID(Long userID);
 
 }

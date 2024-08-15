@@ -116,5 +116,13 @@ public class CourseController {
     }
 
 
+    @GetMapping("/withUser/{userID}")
+    public ResponseEntity<List<CourseDTO>> getCoursesByUserID(@PathVariable Long userID) {
+        List<CourseDTO> courses = courseService.getCoursesByUserID(userID);
+        if (courses.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Eğer kurs yoksa 204 döndür
+        }
+        return ResponseEntity.ok(courses);
+    }
 
 }

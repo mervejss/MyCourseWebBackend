@@ -17,6 +17,9 @@ public class CourseProgress {
     @ManyToOne
     @JoinColumn(name = "userID", referencedColumnName = "userID")
     private User userID; // User tablosundaki userID ile ilişkilendirilmiş
+    @ManyToOne
+    @JoinColumn(name = "courseID", referencedColumnName = "courseID")
+    private Course courseID; // Add this line
 
     private long userProgressTime; // saat cinsinden kullanıcının ilerlediği
 
@@ -70,5 +73,13 @@ public class CourseProgress {
 
     public void setUserProgressTime(long userProgressTime) {
         this.userProgressTime = userProgressTime;
+    }
+
+    public Course getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(Course courseID) {
+        this.courseID = courseID;
     }
 }

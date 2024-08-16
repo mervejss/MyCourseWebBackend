@@ -50,4 +50,12 @@ public class CourseProgressController {
     public void deleteAllCourseProgress() {
         courseProgressService.deleteAllCourseProgress();
     }
+
+    @GetMapping("/byUserAndCourse")
+    public ResponseEntity<List<CourseProgressDTO>> getCourseProgressByUserAndCourse(
+            @RequestParam Long userID, @RequestParam Long courseID) {
+        List<CourseProgressDTO> progress = courseProgressService.getCourseProgressByUserAndCourse(userID, courseID);
+        return ResponseEntity.ok(progress);
+    }
+
 }

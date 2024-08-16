@@ -6,10 +6,29 @@ public class CourseProgressDTO {
 
     private Long courseProgressID;
     private Long userID; // User entity'sindeki userID
+    private Long courseID; // Add this line
+
     private long userProgressTime;
     private Date createdAt;
+    private Date updatedAt;
 
     // Getter ve Setter'lar
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Long getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(Long courseID) {
+        this.courseID = courseID;
+    }
 
     public Long getCourseProgressID() {
         return courseProgressID;

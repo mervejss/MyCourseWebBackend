@@ -34,10 +34,18 @@ public class LogService {
 
     // Tek bir log getir
     public LogDTO getOneLog(Long logID) {
-        return logRepository.findById(logID)
-                .map(LogMapper::toDTO)
-                .orElse(null);
+        Optional<Log> optionalLog = logRepository.findById(logID);
+        if (optionalLog.isPresent()) {
+            Log log = optionalLog.get();
+            System.out.println("Found log: " + log);
+            return LogMapper.toDTO(log);
+        } else {
+            System.out.println("Log with ID " + logID + " not found.");
+            return null;
+        }
     }
+
+
 
     // Yeni bir log oluştur
     public LogDTO saveOneLog(LogDTO newLogDTO) {

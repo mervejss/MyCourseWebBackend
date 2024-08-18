@@ -130,4 +130,18 @@ public class CourseService {
                 .map(CourseMapper::toCourseDTO)
                 .collect(Collectors.toList());
     }
+
+    public void updateAllCoursesUserID(Long newUserID) {
+        User newUser = userRepository.findById(newUserID).orElse(null);
+        if (newUser == null) {
+            throw new IllegalArgumentException("Invalid userID: " + newUserID);
+        }
+
+        List<Course> allCourses = courseRepository.findAll();
+        for (Course course : allCourses) {
+            course.setUserID(newUser);
+        }
+        courseRepository.saveAll(allCourses);
+    }
+
 }

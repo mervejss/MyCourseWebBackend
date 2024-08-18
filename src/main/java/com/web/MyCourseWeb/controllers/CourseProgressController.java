@@ -57,5 +57,11 @@ public class CourseProgressController {
         List<CourseProgressDTO> progress = courseProgressService.getCourseProgressByUserAndCourse(userID, courseID);
         return ResponseEntity.ok(progress);
     }
+    @GetMapping("/byUserAndCourseFull")
+    public ResponseEntity<List<CourseProgressDTO>> getCourseProgressByUserAndCourseFull(
+            @RequestParam Long userID, @RequestParam Long courseID) {
+        List<CourseProgressDTO> progress = courseProgressService.getCourseProgressByUserAndCourse(userID, courseID);
+        return ResponseEntity.ok(progress);
+    }
 
 }

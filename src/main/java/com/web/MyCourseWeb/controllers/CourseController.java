@@ -125,4 +125,16 @@ public class CourseController {
         return ResponseEntity.ok(courses);
     }
 
+    @PutMapping("/updateUserID/{newUserID}")
+    public ResponseEntity<Void> updateAllCoursesUserID(@PathVariable Long newUserID) {
+        try {
+            courseService.updateAllCoursesUserID(newUserID);
+            return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+
+
 }
